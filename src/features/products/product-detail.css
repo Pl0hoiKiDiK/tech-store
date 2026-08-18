@@ -44,13 +44,20 @@
   gap: 24px;
 }
 
+.gallery__thumb-btn {
+  padding: 0;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+}
+
 .gallery__thumb {
   width: 75px;
   height: 93px;
   object-fit: contain;
   background: #F6F6F6;
   border-radius: 8px;
-  cursor: pointer;
+  display: block;
 }
 
 .gallery__main {

@@ -1,14 +1,16 @@
 import { configureStore } from '@reduxjs/toolkit';
-import { setupListeners } from '@reduxjs/toolkit/query';
-import { api } from './api';
 import authReducer from '../features/auth/authSlice';
+import wishlistReducer from '../features/wishlist/wishlistSlice';
+import cartReducer from '../features/cart/cartSlice';
+import { productsApi } from '../features/products/productsApi';
 
 export const store = configureStore({
   reducer: {
     auth: authReducer,
-    [api.reducerPath]: api.reducer,
+    wishlist: wishlistReducer,
+    cart: cartReducer,
+    [productsApi.reducerPath]: productsApi.reducer,
   },
-  middleware: (getDefault) => getDefault().concat(api.middleware),
+  middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware().concat(productsApi.middleware),
 });
-
-setupListeners(store.dispatch);
