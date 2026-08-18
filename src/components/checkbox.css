@@ -1,0 +1,26 @@
+.checkbox {
+  display: inline-flex;
+  align-items: center;
+  cursor: pointer;
+}
+
+.checkbox input {
+  display: none;
+}
+
+.checkbox__box {
+  width: 16px;
+  height: 16px;
+  border: 1px solid #D4D4D4;
+  border-radius: 3px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #fff;
+  transition: background 0.15s, border-color 0.15s;
+}
+
+.checkbox input:checked + .checkbox__box {
+  background: #000;
+  border-color: #000;
+}

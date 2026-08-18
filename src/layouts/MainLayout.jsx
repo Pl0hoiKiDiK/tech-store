@@ -1,26 +1,16 @@
 import React from 'react';
-import { Outlet, Link } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
-import { logout } from '../features/auth/authSlice';
+import { Outlet } from 'react-router-dom';
+import Header from './Header';
+import Footer from './Footer';
 
 export default function MainLayout() {
-  const dispatch = useDispatch();
-
-  const handleLogout = () => {
-    dispatch(logout());
-  };
-
   return (
     <div className="layout">
-      <header className="header">
-        <nav className="nav">
-          <Link to="/catalog">Каталог</Link>
-        </nav>
-        <button onClick={handleLogout}>Выйти</button>
-      </header>
+      <Header />
       <main className="content">
         <Outlet />
       </main>
+      <Footer />
     </div>
   );
 }
