@@ -1,0 +1,11 @@
+:root {
+  --color-black: #000000;
+  --color-black-30: rgba(0, 0, 0, 0.3);
+  --color-gray-bg: #F5F5F5;
+  --color-gray-text: #656565;
+  --color-gray-icon: #989898;
+  --color-gray-breadcrumb: #A4A4A4;
+  --color-gray-pagination: #F6F6F6;
+  --color-footer-text: #CFCFCF;
+  --font-main: 'Inter', system-ui, sans-serif;
+}
