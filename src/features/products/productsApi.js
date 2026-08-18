@@ -3,8 +3,7 @@ import { api } from '../../app/api';
 export const productsApi = api.injectEndpoints({
   endpoints: (builder) => ({
     getProductsByCategory: builder.query({
-      query: ({ category, sortBy = 'title', order = 'asc', limit = 12, skip = 0 }) =>
-        `/products/category/${category}?sortBy=${sortBy}&order=${order}&limit=${limit}&skip=${skip}`,
+      query: (category) => `/products/category/${category}?limit=0`,
       providesTags: ['Products'],
     }),
     getProductById: builder.query({
