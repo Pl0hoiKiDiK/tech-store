@@ -69,8 +69,8 @@ export default function CatalogPage() {
   const pageItems = filtered.slice((page - 1) * PAGE_SIZE, page * PAGE_SIZE);
   const activeCategoryLabel = CATEGORIES.find((c) => c.slug === activeCategory)?.label;
 
-  if (isLoading) return <p className="catalog-status" role="status">Загрузка...</p>;
-  if (isError) return <p className="catalog-status" role="alert">Не удалось загрузить товары</p>;
+  if (isLoading) return <p className="catalog-status" role="status">Loading...</p>;
+  if (isError) return <p className="catalog-status" role="alert">Failed to load products</p>;
 
   return (
     <div className="catalog">
