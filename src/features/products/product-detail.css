@@ -3,7 +3,7 @@
   margin: 0 auto;
 }
 
-.breadcrumbs {
+.product-detail-page .breadcrumbs {
   padding: 40px 160px;
   display: flex;
   align-items: center;
@@ -670,7 +670,7 @@
 }
 
 @media (max-width: 1200px) {
-  .breadcrumbs,
+  .product-detail-page .breadcrumbs,
   .main-info,
   .details-section,
   .reviews-section,
