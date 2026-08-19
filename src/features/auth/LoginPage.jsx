@@ -1,59 +1,93 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
-import { useLoginMutation } from './authApi';
+import { useNavigate } from 'react-router-dom';
+import loginArt from '../../assets/images/login-art.svg';
 import { setCredentials } from './authSlice';
+import './login.css';
 
 export default function LoginPage() {
-  const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
-  const [login, { isLoading, error }] = useLoginMutation();
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
+  const [error, setError] = useState('');
+  const [loading, setLoading] = useState(false);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setError('');
+    setLoading(true);
+
     try {
-      const result = await login({ username, password }).unwrap();
-      dispatch(
-        setCredentials({
-          user: result,
-          accessToken: result.accessToken,
-        })
-      );
+      const response = await fetch('https://dummyjson.com/auth/login', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ username, password }),
+      });
+
+      if (!response.ok) {
+        throw new Error('Invalid credentials');
+      }
+
+      const data = await response.json();
+      dispatch(setCredentials({ user: data, accessToken: data.accessToken }));
       navigate('/catalog');
-    } catch (err) {
-      // ошибка уже доступна через error из useLoginMutation
+    } catch {
+      setError('Invalid username or password');
+    } finally {
+      setLoading(false);
     }
   };
 
   return (
     <div className="login-page">
-      <form onSubmit={handleSubmit} className="login-form">
-        <h1>Вход</h1>
-        <label>
-          Username
-          <input
-            type="text"
-            value={username}
-            onChange={(e) => setUsername(e.target.value)}
-            required
-          />
-        </label>
-        <label>
-          Password
-          <input
-            type="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            required
-          />
-        </label>
-        <button type="submit" disabled={isLoading}>
-          {isLoading ? 'Входим...' : 'Войти'}
-        </button>
-        {error && <p className="form-error">Неверный логин или пароль</p>}
-      </form>
+      <div className="login-page__left">
+        <div className="login-form">
+          <div className="login-form__intro">
+            <h1 className="login-form__title">Create Account 👋</h1>
+            <p className="login-form__subtitle">
+              Welcome! Let&apos;s get you set up. Sign up to start managing your projects.
+            </p>
+          </div>
+
+          <form className="login-form__form" onSubmit={handleSubmit}>
+            <div className="login-form__field">
+              <label htmlFor="login-username">Username</label>
+              <input
+                id="login-username"
+                type="text"
+                placeholder="e.g. emilys"
+                value={username}
+                onChange={(e) => setUsername(e.target.value)}
+                required
+              />
+            </div>
+
+            <div className="login-form__field">
+              <label htmlFor="login-password">Password</label>
+              <input
+                id="login-password"
+                type="password"
+                placeholder="At least 8 characters"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                required
+                minLength={8}
+              />
+            </div>
+
+            {error && <p className="login-form__error" role="alert">{error}</p>}
+
+            <button type="submit" className="login-form__submit" disabled={loading}>
+              {loading ? 'Signing up...' : 'Sign up'}
+            </button>
+          </form>
+        </div>
+      </div>
+
+      <div className="login-page__art">
+        <img src={loginArt} alt="" className="login-page__art-image" />
+      </div>
     </div>
   );
 }

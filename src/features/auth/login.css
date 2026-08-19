@@ -1,0 +1,153 @@
+.login-page {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 32px;
+  padding: 24px 40px;
+  background: #fff;
+  overflow: hidden;
+  box-sizing: border-box;
+}
+
+.login-page__left {
+  flex: 1;
+  max-width: 816px;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.login-form {
+  width: 388px;
+  max-width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.login-form__intro {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.login-form__title {
+  font-family: var(--font-main);
+  font-weight: 700;
+  font-size: 28px;
+  line-height: 36px;
+  color: #162D3A;
+  margin: 0;
+}
+
+.login-form__subtitle {
+  font-family: var(--font-main);
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 26px;
+  color: #000;
+  margin: 0;
+}
+
+.login-form__form {
+  width: 100%;
+  margin-top: 48px;
+  display: flex;
+  flex-direction: column;
+}
+
+.login-form__field {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.login-form__field + .login-form__field {
+  margin-top: 24px;
+}
+
+.login-form__field label {
+  font-family: var(--font-main);
+  font-weight: 500;
+  font-size: 14px;
+  color: #162D3A;
+}
+
+.login-form__field input {
+  width: 100%;
+  height: 48px;
+  border-radius: 12px;
+  background: #F7FBFF;
+  border: 1px solid #D4D7E3;
+  padding: 0 16px;
+  font-family: var(--font-main);
+  font-size: 15px;
+  color: #162D3A;
+  outline: none;
+  box-sizing: border-box;
+}
+
+.login-form__field input::placeholder {
+  color: #8897AD;
+}
+
+.login-form__field input:focus {
+  border-color: #162D3A;
+}
+
+.login-form__error {
+  font-family: var(--font-main);
+  font-size: 13px;
+  color: #D64545;
+  margin: 8px 0 0;
+}
+
+.login-form__submit {
+  width: 100%;
+  height: 52px;
+  border-radius: 12px;
+  background: #162D3A;
+  border: none;
+  color: #fff;
+  font-family: var(--font-main);
+  font-weight: 600;
+  font-size: 16px;
+  margin-top: 24px;
+  cursor: pointer;
+}
+
+.login-form__submit:hover {
+  opacity: 0.9;
+}
+
+.login-page__art {
+  flex: 1;
+  max-width: 816px;
+  height: 100%;
+  border-radius: 24px;
+  overflow: hidden;
+}
+
+.login-page__art-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+@media (max-width: 1400px) {
+  .login-page {
+    flex-direction: column;
+    height: auto;
+    min-height: 100vh;
+    padding: 24px 20px;
+  }
+  .login-page__art {
+    display: none;
+  }
+  .login-page__left {
+    max-width: 480px;
+  }
+}
