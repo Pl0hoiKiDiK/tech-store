@@ -8,8 +8,6 @@ import cartIcon from '../assets/icons/cart-icon.svg';
 import userIcon from '../assets/icons/user-icon.svg';
 import './header.css';
 
-const NAV_ITEMS = ['Home', 'About', 'Contact Us', 'Blog'];
-
 export default function Header() {
   const dispatch = useDispatch();
   const [menuOpen, setMenuOpen] = useState(false);
@@ -26,20 +24,6 @@ export default function Header() {
           </label>
           <input id="header-search-input" type="text" placeholder="Search" />
         </div>
-
-        <nav className="header__nav" aria-label="Основная навигация">
-          {NAV_ITEMS.map((item, idx) => (
-            <span
-              key={item}
-              className={idx === 0 ? 'active' : ''}
-              role="link"
-              tabIndex={0}
-              aria-current={idx === 0 ? 'page' : undefined}
-            >
-              {item}
-            </span>
-          ))}
-        </nav>
 
         <div className="header__icons">
           <button className="header__icon" type="button" aria-label="Избранное">
@@ -77,13 +61,6 @@ export default function Header() {
             <img src={searchIcon} alt="" className="header__search-icon" />
             <input type="text" placeholder="Search" />
           </div>
-          <nav className="header__mobile-nav" aria-label="Мобильная навигация">
-            {NAV_ITEMS.map((item, idx) => (
-              <span key={item} className={idx === 0 ? 'active' : ''}>
-                {item}
-              </span>
-            ))}
-          </nav>
           <div className="header__mobile-icons">
             <button className="header__icon" type="button" aria-label="Избранное">
               <img src={heartIcon} alt="" />
