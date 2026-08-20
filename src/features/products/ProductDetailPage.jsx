@@ -62,6 +62,7 @@ export default function ProductDetailPage() {
   const [selectedStorage, setSelectedStorage] = useState('256GB');
   const [detailsExpanded, setDetailsExpanded] = useState(false);
   const [reviewsExpanded, setReviewsExpanded] = useState(false);
+  const [shortDescExpanded, setShortDescExpanded] = useState(false);
 
   const dispatch = useDispatch();
   const wishlistItems = useSelector((state) => state.wishlist.items);
@@ -150,7 +151,7 @@ export default function ProductDetailPage() {
           </div>
 
           <div className="product-options">
-            <div className="option-block">
+            <div className="option-block option-block--color">
               <p className="option-block__label">Select color:</p>
               <div className="color-list" role="radiogroup" aria-label="Color selection">
                 {COLOR_OPTIONS.map((color, idx) => (
@@ -198,7 +199,20 @@ export default function ProductDetailPage() {
             </ul>
           </div>
 
-          <p className="product-description">{product.description}</p>
+          <div className="product-description-wrap">
+            <p className={`product-description ${shortDescExpanded ? '' : 'product-description--clamped'}`}>
+              {product.description}
+            </p>
+            {!shortDescExpanded && (
+              <button
+                type="button"
+                className="product-description__more"
+                onClick={() => setShortDescExpanded(true)}
+              >
+                more...
+              </button>
+            )}
+          </div>
 
           <div className="action-buttons">
             <button
@@ -272,8 +286,10 @@ export default function ProductDetailPage() {
 
           <div className="overall-rating">
             <div className="rating-summary">
-              <span className="rating-summary__score">{product.rating?.toFixed(1)}</span>
-              <p className="rating-summary__count">{product.reviews?.length || 0} reviews</p>
+              <div className="rating-summary__score-wrap">
+                <span className="rating-summary__score">{product.rating?.toFixed(1)}</span>
+                <p className="rating-summary__count">{product.reviews?.length || 0} reviews</p>
+              </div>
               <StarRow rating={averageRating} />
             </div>
 
