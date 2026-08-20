@@ -2,40 +2,29 @@ import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import loginArt from '../../assets/images/login-art.svg';
+import { useLoginMutation } from './authApi';
 import { setCredentials } from './authSlice';
 import './login.css';
 
 export default function LoginPage() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const [login, { isLoading }] = useLoginMutation();
+
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
-  const [loading, setLoading] = useState(false);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError('');
-    setLoading(true);
 
     try {
-      const response = await fetch('https://dummyjson.com/auth/login', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ username, password }),
-      });
-
-      if (!response.ok) {
-        throw new Error('Invalid credentials');
-      }
-
-      const data = await response.json();
+      const data = await login({ username, password }).unwrap();
       dispatch(setCredentials({ user: data, accessToken: data.accessToken }));
       navigate('/catalog');
     } catch {
       setError('Invalid username or password');
-    } finally {
-      setLoading(false);
     }
   };
 
@@ -44,9 +33,9 @@ export default function LoginPage() {
       <div className="login-page__left">
         <div className="login-form">
           <div className="login-form__intro">
-            <h1 className="login-form__title">Create Account 👋</h1>
+            <h1 className="login-form__title">Welcome Back 👋</h1>
             <p className="login-form__subtitle">
-              Welcome! Let&apos;s get you set up. Sign up to start managing your projects.
+              Today is a new day. It&apos;s your day. You shape it. Sign in to start managing your projects.
             </p>
           </div>
 
@@ -78,8 +67,8 @@ export default function LoginPage() {
 
             {error && <p className="login-form__error" role="alert">{error}</p>}
 
-            <button type="submit" className="login-form__submit" disabled={loading}>
-              {loading ? 'Signing up...' : 'Sign up'}
+            <button type="submit" className="login-form__submit" disabled={isLoading}>
+              {isLoading ? 'Signing in...' : 'Sign in'}
             </button>
           </form>
         </div>
