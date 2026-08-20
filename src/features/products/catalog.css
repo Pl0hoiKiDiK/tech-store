@@ -500,28 +500,30 @@
   }
 
 .mf-filters .accordion {
-  width: 341px;
-  margin-bottom: 24px;
-  border-bottom: 0.5px solid #B5B5B5;
-}
+    width: 341px;
+    padding: 0;
+    margin-top: 24px;
+    border-bottom: none;
+  }
 
-.mf-filters .accordion:last-child {
-  margin-bottom: 0;
-  border-bottom: none;
+.mf-filters .accordion:first-child {
+  margin-top: 0;
+  border-top: none;
+  padding-top: 0;
 }
 
 .mf-filters .accordion__header {
-  width: 341px;
-  height: 48px;
-  font-family: var(--font-main);
-  font-weight: 500;
-  font-size: 18px;
-  line-height: 24px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding-bottom: 12px;
-}
+    width: 341px;
+    font-family: var(--font-main);
+    font-weight: 500;
+    font-size: 18px;
+    line-height: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 0 12px;
+    border-bottom: 0.5px solid #B5B5B5;
+  }
 
   .mf-filters .filter__brand-name {
     font-weight: 500;

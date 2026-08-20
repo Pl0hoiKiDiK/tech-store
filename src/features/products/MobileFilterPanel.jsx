@@ -14,7 +14,7 @@ export default function MobileFilterPanel({ onClose, onApply, ...filterProps }) 
       </div>
 
       <div className="mf-filters">
-        <FilterContent {...filterProps} />
+        <FilterContent {...filterProps} isMobile />
       </div>
 
       <button type="button" className="mf-apply" onClick={onApply}>

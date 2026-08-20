@@ -1,4 +1,4 @@
-import React, { useMemo, useState } from 'react';
+import React, { useMemo, useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { useGetProductsByCategoryQuery } from './productsApi';
 import Select from '../../components/Select';
@@ -21,6 +21,18 @@ export default function CatalogPage() {
     const [mobileFilterOpen, setMobileFilterOpen] = useState(false);
 
     const allProducts = data?.products || [];
+
+    const priceBounds = useMemo(() => {
+        if (allProducts.length === 0) return { min: 0, max: 1000 };
+        const prices = allProducts.map((p) => p.price);
+        return { min: Math.floor(Math.min(...prices)), max: Math.ceil(Math.max(...prices)) };
+    }, [allProducts]);
+
+    const [priceRange, setPriceRange] = useState(null);
+
+    useEffect(() => {
+        setPriceRange(priceBounds);
+    }, [priceBounds.min, priceBounds.max]);
 
     const brands = useMemo(() => {
         const counts = {};
@@ -52,12 +64,15 @@ export default function CatalogPage() {
         if (selectedBrands.length > 0) {
             result = result.filter((p) => selectedBrands.includes(p.brand));
         }
+        if (priceRange) {
+            result = result.filter((p) => p.price >= priceRange.min && p.price <= priceRange.max);
+        }
         return [...result].sort((a, b) => {
             if (sortBy === 'price') return a.price - b.price;
             if (sortBy === 'title') return a.title.localeCompare(b.title);
             return b.rating - a.rating;
         });
-    }, [allProducts, selectedBrands, sortBy]);
+    }, [allProducts, selectedBrands, priceRange, sortBy]);
 
     const totalPages = Math.max(1, Math.ceil(filtered.length / PAGE_SIZE));
     const pageItems = filtered.slice((page - 1) * PAGE_SIZE, page * PAGE_SIZE);
@@ -71,6 +86,9 @@ export default function CatalogPage() {
         toggleBrand,
         brandSearch,
         setBrandSearch,
+        priceRange,
+        priceBounds,
+        onPriceChange: setPriceRange,
     };
 
     if (isLoading) return <p className="catalog-status" role="status">Loading...</p>;
@@ -86,7 +104,7 @@ export default function CatalogPage() {
 
             <div className="catalog__body">
                 <aside className="filter" aria-label="Фильтры товаров">
-                    <FilterContent {...filterProps} />
+                    <FilterContent {...filterProps} isMobile={false} />
                 </aside>
 
                 <section className="products" aria-label="Список товаров">
