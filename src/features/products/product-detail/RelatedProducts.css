@@ -1,0 +1,162 @@
+.related-section {
+  padding: 80px 160px;
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+}
+
+.related-title {
+  font-weight: 500;
+  font-size: 24px;
+  line-height: 32px;
+  margin: 0;
+}
+
+.related-row {
+  display: flex;
+  gap: 16px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.related-card {
+  width: 268px;
+  height: 432px;
+  background: #F6F6F6;
+  border-radius: 12px;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+}
+
+.related-card__like {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  width: 32px;
+  height: 32px;
+  background: transparent;
+  padding: 0;
+}
+
+.related-card__like img {
+  width: 32px;
+  height: 32px;
+  opacity: 0.77;
+}
+
+.related-card__image {
+  width: 160px;
+  height: 160px;
+  object-fit: contain;
+  margin-top: 24px;
+}
+
+.related-card__info {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  align-items: center;
+  margin-top: 24px;
+}
+
+.related-card__title {
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 24px;
+  text-align: center;
+}
+
+.related-card__price {
+  font-weight: 600;
+  font-size: 24px;
+  margin: 0;
+}
+
+.related-card__button {
+  width: 188px;
+  height: 48px;
+  background: #000;
+  color: #fff;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 500;
+  font-size: 14px;
+  margin-top: 24px;
+}
+
+@media (max-width: 1200px) {
+  .related-section {
+    padding-left: 40px;
+    padding-right: 40px;
+  }
+}
+
+@media (max-width: 900px) {
+  .related-row {
+    flex-wrap: wrap;
+  }
+}
+
+@media (max-width: 767px) {
+  .related-section {
+    padding: 0 16px 40px;
+    margin-top: 37px;
+    gap: 32px;
+  }
+
+  .related-title {
+    font-weight: 500;
+    font-size: 24px;
+    line-height: 32px;
+  }
+
+  .related-row {
+    display: grid;
+    grid-template-columns: repeat(2, 163.5px);
+    grid-auto-rows: 352px;
+    gap: 16px;
+    width: 343px;
+  }
+
+  .related-card {
+    width: 163.5px;
+    height: 352px;
+  }
+
+  .related-card__like {
+    width: 32px;
+    height: 32px;
+  }
+
+  .related-card__image {
+    width: 104px;
+    height: 104px;
+  }
+
+  .related-card__title {
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 24px;
+  }
+
+  .related-card__price {
+    font-weight: 600;
+    font-size: 24px;
+    line-height: 24px;
+  }
+
+  .related-card__button {
+    width: 139.5px;
+    height: 48px;
+    border-radius: 8px;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 24px;
+  }
+}

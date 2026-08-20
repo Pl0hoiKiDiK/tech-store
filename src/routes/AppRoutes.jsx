@@ -4,7 +4,7 @@ import MainLayout from '../layouts/MainLayout';
 import PrivateRoute from './PrivateRoute';
 import LoginPage from '../features/auth/LoginPage';
 import CatalogPage from '../features/products/CatalogPage';
-import ProductDetailPage from '../features/products/ProductDetailPage';
+import ProductDetailPage from '../features/products/product-detail/ProductDetailPage';
 
 export default function AppRoutes() {
   return (
