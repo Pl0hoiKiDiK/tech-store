@@ -79,8 +79,6 @@ export default function CatalogPage() {
     return (
         <div className="catalog">
             <nav className="breadcrumbs" aria-label="Хлебные крошки">
-                <span>Home</span>
-                <ArrowIcon />
                 <span>Catalog</span>
                 <ArrowIcon />
                 <span className="breadcrumbs__current" aria-current="page">{activeCategoryLabel}</span>

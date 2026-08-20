@@ -63,19 +63,19 @@ export default function ProductDetailPage() {
   const [detailsExpanded, setDetailsExpanded] = useState(false);
   const [reviewsExpanded, setReviewsExpanded] = useState(false);
 
-    const dispatch = useDispatch();
-    const wishlistItems = useSelector((state) => state.wishlist.items);
-    const [mainImage, setMainImage] = useState(null);
-    const [cartFeedback, setCartFeedback] = useState(false);
+  const dispatch = useDispatch();
+  const wishlistItems = useSelector((state) => state.wishlist.items);
+  const [mainImage, setMainImage] = useState(null);
+  const [cartFeedback, setCartFeedback] = useState(false);
 
-    const isInWishlist = product ? wishlistItems.some((item) => item.id === product.id) : false;
-    const activeImage = mainImage || product?.images?.[0];
+  const isInWishlist = product ? wishlistItems.some((item) => item.id === product.id) : false;
+  const activeImage = mainImage || product?.images?.[0];
 
-    const handleAddToCart = () => {
+  const handleAddToCart = () => {
     dispatch(addToCart({ id: product.id, title: product.title, price: product.price, thumbnail: product.thumbnail }));
     setCartFeedback(true);
     setTimeout(() => setCartFeedback(false), 1500);
-    };
+  };
 
   const { data: relatedData } = useGetProductsByCategoryQuery(product?.category, {
     skip: !product,
@@ -115,8 +115,6 @@ export default function ProductDetailPage() {
   return (
     <div className="product-detail-page">
       <nav className="breadcrumbs" aria-label="Breadcrumbs">
-        <Link to="/catalog">Home</Link>
-        <ArrowIcon />
         <Link to="/catalog">Catalog</Link>
         <ArrowIcon />
         <span>{product.category}</span>
@@ -126,21 +124,21 @@ export default function ProductDetailPage() {
 
       <section className="main-info">
         <div className="main-info__gallery">
-            <div className="gallery__thumbs">
-                {product.images?.slice(0, 4).map((img, idx) => (
-                <button
-                    key={idx}
-                    type="button"
-                    className="gallery__thumb-btn"
-                    onClick={() => setMainImage(img)}
-                    aria-label={`Show photo ${idx + 1}`}
-                >
-                    <img src={img} alt={`${product.title}, photo ${idx + 1}`} className="gallery__thumb" />
-                </button>
-                ))}
-            </div>
-            <img src={activeImage} alt={product.title} className="gallery__main" />
-            </div>
+          <div className="gallery__thumbs">
+            {product.images?.slice(0, 4).map((img, idx) => (
+              <button
+                key={idx}
+                type="button"
+                className="gallery__thumb-btn"
+                onClick={() => setMainImage(img)}
+                aria-label={`Show photo ${idx + 1}`}
+              >
+                <img src={img} alt={`${product.title}, photo ${idx + 1}`} className="gallery__thumb" />
+              </button>
+            ))}
+          </div>
+          <img src={activeImage} alt={product.title} className="gallery__main" />
+        </div>
 
         <div className="main-info__content">
           <div className="product-heading">
@@ -202,19 +200,19 @@ export default function ProductDetailPage() {
 
           <p className="product-description">{product.description}</p>
 
-            <div className="action-buttons">
-                <button
-                    type="button"
-                    className="btn btn--outline"
-                    onClick={() => dispatch(toggleWishlist({ id: product.id, title: product.title, price: product.price, thumbnail: product.thumbnail }))}
-                    aria-pressed={isInWishlist}
-                >
-                    {isInWishlist ? 'Remove from Wishlist' : 'Add to Wishlist'}
-                </button>
-                <button type="button" className="btn btn--filled" onClick={handleAddToCart}>
-                    {cartFeedback ? 'Added!' : 'Add to Cart'}
-                </button>
-            </div>
+          <div className="action-buttons">
+            <button
+              type="button"
+              className="btn btn--outline"
+              onClick={() => dispatch(toggleWishlist({ id: product.id, title: product.title, price: product.price, thumbnail: product.thumbnail }))}
+              aria-pressed={isInWishlist}
+            >
+              {isInWishlist ? 'Remove from Wishlist' : 'Add to Wishlist'}
+            </button>
+            <button type="button" className="btn btn--filled" onClick={handleAddToCart}>
+              {cartFeedback ? 'Added!' : 'Add to Cart'}
+            </button>
+          </div>
 
           <ul className="delivery-info">
             <DeliveryItem icon={deliveryTruckIcon} label="Free Delivery" value="1-2 day" />
