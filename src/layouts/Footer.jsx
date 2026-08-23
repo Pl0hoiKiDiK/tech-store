@@ -28,7 +28,7 @@ export default function Footer() {
   return (
     <footer className="footer">
       <div className="footer__brand">
-        <img src={logoIcon} alt="Cyber — интернет-магазин техники" className="footer__logo" />
+        <img src={logoIcon} alt="Cyber tech store" className="footer__logo" />
         <p className="footer__description">
           We are a residential interior design firm located in Portland. Our boutique studio offers more than.
         </p>
@@ -39,7 +39,7 @@ export default function Footer() {
               href={s.url}
               target="_blank"
               rel="noopener noreferrer"
-              aria-label={`Мы в ${s.label}`}
+              aria-label={`Follow us on ${s.label}`}
             >
               <img src={s.icon} alt="" />
             </a>
@@ -47,7 +47,7 @@ export default function Footer() {
         </div>
       </div>
 
-      <nav className="footer__nav" aria-label="Навигация в футере">
+      <nav className="footer__nav" aria-label="Footer navigation">
         {FOOTER_COLUMNS.map((col) => (
           <div className="footer__column" key={col.title}>
             <h4>{col.title}</h4>

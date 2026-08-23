@@ -12,13 +12,13 @@ function ChevronIcon({ direction }) {
 
 export default function Pagination({ page, totalPages, onPageChange }) {
   return (
-    <nav className="pagination" aria-label="Пагинация">
+    <nav className="pagination" aria-label="Pagination">
       <button
         className="pagination__arrow"
         type="button"
         onClick={() => onPageChange(Math.max(1, page - 1))}
         disabled={page === 1}
-        aria-label="Предыдущая страница"
+        aria-label="Previous page"
       >
         <ChevronIcon direction="left" />
       </button>
@@ -30,7 +30,7 @@ export default function Pagination({ page, totalPages, onPageChange }) {
             type="button"
             className={`pagination__number ${num === page ? 'pagination__active' : ''}`}
             onClick={() => onPageChange(num)}
-            aria-label={`Страница ${num}`}
+            aria-label={`Page ${num}`}
             aria-current={num === page ? 'page' : undefined}
           >
             {num}
@@ -41,7 +41,7 @@ export default function Pagination({ page, totalPages, onPageChange }) {
         type="button"
         onClick={() => onPageChange(Math.min(totalPages, page + 1))}
         disabled={page === totalPages}
-        aria-label="Следующая страница"
+        aria-label="Next page"
       >
         <ChevronIcon direction="right" />
       </button>

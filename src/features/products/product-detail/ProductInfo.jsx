@@ -1,8 +1,7 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { toggleWishlist } from '../../wishlist/wishlistSlice';
+import { useDispatch } from 'react-redux';
 import { addToCart } from '../../cart/cartSlice';
-import { showToast } from '../../ui/uiSlice';
+import WishlistButton from '../../../components/WishlistButton';
 import screenSizeIcon from '../../../assets/icons/screensize-icon.svg';
 import cpuIcon from '../../../assets/icons/cpu-icon.svg';
 import coresIcon from '../../../assets/icons/cores-icon.svg';
@@ -65,9 +64,6 @@ export default function ProductInfo({ product }) {
     }, [product.description]);
 
     const dispatch = useDispatch();
-    const wishlistItems = useSelector((state) => state.wishlist.items);
-    const isInWishlist = wishlistItems.some((item) => item.id === product.id);
-
     const handleAddToCart = () => {
         dispatch(addToCart({ id: product.id, title: product.title, price: product.price, thumbnail: product.thumbnail }));
         setCartFeedback(true);
@@ -156,17 +152,7 @@ export default function ProductInfo({ product }) {
             </div>
 
             <div className="action-buttons">
-                <button
-                    type="button"
-                    className="btn btn--outline"
-                    onClick={() => {
-                        dispatch(toggleWishlist({ id: product.id, title: product.title, price: product.price, thumbnail: product.thumbnail }));
-                        dispatch(showToast(isInWishlist ? 'Removed from wishlist' : 'Added to wishlist'));
-                    }}
-                    aria-pressed={isInWishlist}
-                >
-                    {isInWishlist ? 'Remove from Wishlist' : 'Add to Wishlist'}
-                </button>
+                <WishlistButton product={product} className="btn btn--outline" variant="text" />
                 <button type="button" className="btn btn--filled" onClick={handleAddToCart}>
                     {cartFeedback ? 'Added!' : 'Add to Cart'}
                 </button>

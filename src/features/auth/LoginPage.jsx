@@ -75,7 +75,7 @@ export default function LoginPage() {
       </div>
 
       <div className="login-page__art">
-        <img src={loginArt} alt="" className="login-page__art-image" />
+        <img src={loginArt} alt="" className="login-page__art-image" loading="lazy" decoding="async" fetchPriority="low" />
       </div>
     </div>
   );

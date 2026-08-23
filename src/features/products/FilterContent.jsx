@@ -38,7 +38,7 @@ export default function FilterContent({
               <Checkbox
                 checked={activeCategory === cat.slug}
                 onChange={() => handleCategoryChange(cat.slug)}
-                label={`Категория ${cat.label}`}
+                label={`Category ${cat.label}`}
               />
               <span className="filter__brand-name">{cat.label}</span>
             </label>
@@ -53,7 +53,7 @@ export default function FilterContent({
       <div className="filter__search">
         <img src={searchIcon} alt="" className="filter__search-icon" />
         <label htmlFor="brand-search-input" className="visually-hidden">
-          Поиск бренда
+          Search brand
         </label>
         <input
           id="brand-search-input"
@@ -70,7 +70,7 @@ export default function FilterContent({
               <Checkbox
                 checked={selectedBrands.includes(brand)}
                 onChange={() => toggleBrand(brand)}
-                label={`Бренд ${brand}, ${count} товаров`}
+                label={`Brand ${brand}, ${count} products`}
               />
               <span className="filter__brand-name">{brand}</span>
               <span className="filter__brand-count">{count}</span>

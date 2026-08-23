@@ -4,7 +4,7 @@ import { toggleWishlist } from '../features/wishlist/wishlistSlice';
 import { showToast } from '../features/ui/uiSlice';
 import HeartIcon from './HeartIcon';
 
-export default function WishlistButton({ product, className = 'wishlist-btn' }) {
+export default function WishlistButton({ product, className = 'wishlist-btn', variant = 'icon' }) {
   const dispatch = useDispatch();
   const wishlistItems = useSelector((state) => state.wishlist.items);
   const isActive = wishlistItems.some((item) => item.id === product.id);
@@ -23,15 +23,21 @@ export default function WishlistButton({ product, className = 'wishlist-btn' }) 
     dispatch(showToast(isActive ? 'Removed from wishlist' : 'Added to wishlist'));
   };
 
+  const ariaLabel = isActive
+    ? `Remove ${product.title} from wishlist`
+    : `Add ${product.title} to wishlist`;
+
   return (
     <button
       type="button"
-      className={`${className}${isActive ? ` ${className}--active` : ''}`}
+      className={`${className}${isActive && variant === 'icon' ? ` ${className}--active` : ''}`}
       onClick={handleClick}
-      aria-label={isActive ? `Remove ${product.title} from wishlist` : `Add ${product.title} to wishlist`}
+      aria-label={variant === 'text' ? undefined : ariaLabel}
       aria-pressed={isActive}
     >
-      <HeartIcon active={isActive} />
+      {variant === 'text'
+        ? (isActive ? 'Remove from Wishlist' : 'Add to Wishlist')
+        : <HeartIcon active={isActive} />}
     </button>
   );
 }

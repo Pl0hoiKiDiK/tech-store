@@ -12,7 +12,7 @@ export default function ProductGrid({ products }) {
           <Link
             to={`/product/${product.id}`}
             className="product-card__image-link"
-            aria-label={`Перейти к товару ${product.title}`}
+            aria-label={`View product ${product.title}`}
           >
             <img src={product.thumbnail} alt={product.title} />
           </Link>

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useLocation, useNavigate, useSearchParams } from 'react-router-dom';
+import { Link, useLocation, useNavigate, useSearchParams } from 'react-router-dom';
 import { logout } from '../features/auth/authSlice';
 import { showToast } from '../features/ui/uiSlice';
 import logoIcon from '../assets/icons/logo-icon.svg';
@@ -15,7 +15,7 @@ function HeaderSearch({ id, value, onChange, onSubmit, className = 'header__sear
     <form className={className} onSubmit={onSubmit}>
       <img src={searchIcon} alt="" className="header__search-icon" />
       <label htmlFor={id} className="visually-hidden">
-        Поиск товаров
+        Search products
       </label>
       <input
         id={id}
@@ -70,10 +70,18 @@ export default function Header() {
     dispatch(showToast('Cart is coming soon'));
   };
 
+  const handleLogout = () => {
+    dispatch(logout());
+    navigate('/login');
+    setMenuOpen(false);
+  };
+
   return (
     <header className="header">
       <div className="header__inner">
-        <img src={logoIcon} alt="Cyber — интернет-магазин техники" className="header__logo" />
+        <Link to="/catalog" className="header__logo-link" aria-label="Go to catalog">
+          <img src={logoIcon} alt="Cyber tech store" className="header__logo" />
+        </Link>
 
         <HeaderSearch
           id="header-search-input"
@@ -86,7 +94,7 @@ export default function Header() {
           <button
             className="header__icon"
             type="button"
-            aria-label="Избранное"
+            aria-label="Wishlist"
             onClick={handleWishlistClick}
           >
             <img src={heartIcon} alt="" />
@@ -94,7 +102,7 @@ export default function Header() {
           <button
             className="header__icon"
             type="button"
-            aria-label="Корзина"
+            aria-label="Cart"
             onClick={handleCartClick}
           >
             <img src={cartIcon} alt="" />
@@ -102,8 +110,8 @@ export default function Header() {
           <button
             className="header__icon"
             type="button"
-            onClick={() => dispatch(logout())}
-            aria-label="Выйти из аккаунта"
+            onClick={handleLogout}
+            aria-label="Sign out"
           >
             <img src={userIcon} alt="" />
           </button>
@@ -112,7 +120,7 @@ export default function Header() {
         <button
           className="header__burger"
           type="button"
-          aria-label="Открыть меню"
+          aria-label="Open menu"
           aria-expanded={menuOpen}
           onClick={() => setMenuOpen((value) => !value)}
         >
@@ -135,7 +143,7 @@ export default function Header() {
             <button
               className="header__icon"
               type="button"
-              aria-label="Избранное"
+              aria-label="Wishlist"
               onClick={handleWishlistClick}
             >
               <img src={heartIcon} alt="" />
@@ -143,7 +151,7 @@ export default function Header() {
             <button
               className="header__icon"
               type="button"
-              aria-label="Корзина"
+              aria-label="Cart"
               onClick={handleCartClick}
             >
               <img src={cartIcon} alt="" />
@@ -151,8 +159,8 @@ export default function Header() {
             <button
               className="header__icon"
               type="button"
-              onClick={() => dispatch(logout())}
-              aria-label="Выйти из аккаунта"
+              onClick={handleLogout}
+              aria-label="Sign out"
             >
               <img src={userIcon} alt="" />
             </button>

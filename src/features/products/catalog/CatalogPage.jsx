@@ -130,7 +130,7 @@ export default function CatalogPage() {
 
   return (
     <div className="catalog">
-      <nav className="breadcrumbs" aria-label="Хлебные крошки">
+      <nav className="breadcrumbs" aria-label="Breadcrumbs">
         <span>Catalog</span>
         <ArrowIcon />
         {searchQuery ? (
@@ -143,11 +143,11 @@ export default function CatalogPage() {
       </nav>
 
       <div className="catalog__body">
-        <aside className="filter" aria-label="Фильтры товаров">
+        <aside className="filter" aria-label="Product filters">
           <FilterContent {...filterProps} isMobile={false} />
         </aside>
 
-        <section className="products" aria-label="Список товаров">
+        <section className="products" aria-label="Product list">
           {mobileFilterOpen ? (
             <MobileFilterPanel
               onClose={() => setMobileFilterOpen(false)}
