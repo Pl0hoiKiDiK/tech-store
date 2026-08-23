@@ -3,7 +3,7 @@ import { Routes, Route, Navigate } from 'react-router-dom';
 import MainLayout from '../layouts/MainLayout';
 import PrivateRoute from './PrivateRoute';
 import LoginPage from '../features/auth/LoginPage';
-import CatalogPage from '../features/products/CatalogPage';
+import CatalogPage from '../features/products/catalog/CatalogPage';
 import ProductDetailPage from '../features/products/product-detail/ProductDetailPage';
 
 export default function AppRoutes() {

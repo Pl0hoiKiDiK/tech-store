@@ -1,0 +1,95 @@
+.mobile-filter-panel {
+  display: none;
+}
+
+@media (max-width: 767px) {
+  .mobile-filter-panel {
+    display: flex;
+    flex-direction: column;
+    width: 343px;
+    margin: 31px auto 0;
+  }
+
+  .mf-top {
+    width: 343px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 31px;
+  }
+
+  .mf-top__back {
+    width: 24px;
+    height: 24px;
+    background: transparent;
+    padding: 0;
+    display: flex;
+    align-items: center;
+  }
+
+  .mf-top__title {
+    font-family: var(--font-main);
+    font-weight: 500;
+    font-size: 24px;
+    line-height: 32px;
+  }
+
+  .mf-filters {
+    width: 341px;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .mf-filters .accordion {
+    width: 341px;
+    padding: 0;
+    margin-top: 24px;
+    border-bottom: none;
+  }
+
+  .mf-filters .accordion:first-child {
+    margin-top: 0;
+    border-top: none;
+    padding-top: 0;
+  }
+
+  .mf-filters .accordion__header {
+    width: 341px;
+    font-family: var(--font-main);
+    font-weight: 500;
+    font-size: 18px;
+    line-height: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 0 12px;
+    border-bottom: 0.5px solid #B5B5B5;
+  }
+
+  .mf-filters .filter__brand-name {
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 24px;
+  }
+
+  .mf-filters .filter__brand-count {
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 24px;
+  }
+
+  .mf-apply {
+    width: 341px;
+    height: 48px;
+    background: #000;
+    border-radius: 8px;
+    color: #fff;
+    font-family: var(--font-main);
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 24px;
+    margin: 31px auto 31px;
+    align-self: center;
+  }
+}

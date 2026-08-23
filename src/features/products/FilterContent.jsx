@@ -3,6 +3,7 @@ import Accordion from '../../components/Accordion';
 import Checkbox from '../../components/Checkbox';
 import PriceRangeFilter from './PriceRangeFilter';
 import searchIcon from '../../assets/icons/search-icon.svg';
+import './FilterContent.css';
 
 const CATEGORIES = [
   { slug: 'smartphones', label: 'Smartphones' },

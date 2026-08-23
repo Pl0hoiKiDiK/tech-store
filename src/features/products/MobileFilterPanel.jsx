@@ -1,5 +1,6 @@
 import React from 'react';
 import FilterContent from './FilterContent';
+import './MobileFilterPanel.css';
 
 export default function MobileFilterPanel({ onClose, onApply, ...filterProps }) {
   return (
