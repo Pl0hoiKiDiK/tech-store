@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import likeIcon from '../../../assets/icons/like-icon.svg';
+import WishlistButton from '../../../components/WishlistButton';
 import './RelatedProducts.css';
 
 export default function RelatedProducts({ products }) {
@@ -12,9 +12,7 @@ export default function RelatedProducts({ products }) {
       <ul className="related-row">
         {products.map((item) => (
           <li className="related-card" key={item.id}>
-            <button className="related-card__like" type="button" aria-label={`Add ${item.title} to wishlist`}>
-              <img src={likeIcon} alt="" />
-            </button>
+            <WishlistButton product={item} className="related-card__like" />
             <Link to={`/product/${item.id}`}>
               <img src={item.thumbnail} alt={item.title} className="related-card__image" />
             </Link>

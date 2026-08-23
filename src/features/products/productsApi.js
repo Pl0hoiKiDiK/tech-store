@@ -13,6 +13,10 @@ export const productsApi = api.injectEndpoints({
     getCategories: builder.query({
       query: () => '/products/categories',
     }),
+    searchProducts: builder.query({
+      query: (searchQuery) => `/products/search?q=${encodeURIComponent(searchQuery)}`,
+      providesTags: ['Products'],
+    }),
   }),
 });
 
@@ -20,4 +24,5 @@ export const {
   useGetProductsByCategoryQuery,
   useGetProductByIdQuery,
   useGetCategoriesQuery,
+  useSearchProductsQuery,
 } = productsApi;

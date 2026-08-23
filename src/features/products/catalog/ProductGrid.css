@@ -29,10 +29,8 @@
   padding: 0;
 }
 
-.product-card__like img {
-  width: 32px;
-  height: 32px;
-  opacity: 0.77;
+.product-card__like svg {
+  display: block;
 }
 
 .product-card__image-link img {

@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import likeIcon from '../../../assets/icons/like-icon.svg';
+import WishlistButton from '../../../components/WishlistButton';
 import './ProductGrid.css';
 
 export default function ProductGrid({ products }) {
@@ -8,9 +8,7 @@ export default function ProductGrid({ products }) {
     <ul className="products__grid">
       {products.map((product) => (
         <li className="product-card" key={product.id}>
-          <button className="product-card__like" type="button" aria-label={`Добавить ${product.title} в избранное`}>
-            <img src={likeIcon} alt="" />
-          </button>
+          <WishlistButton product={product} className="product-card__like" />
           <Link
             to={`/product/${product.id}`}
             className="product-card__image-link"

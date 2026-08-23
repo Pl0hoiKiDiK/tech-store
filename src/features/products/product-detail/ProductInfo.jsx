@@ -2,6 +2,7 @@ import React, { useState, useRef, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { toggleWishlist } from '../../wishlist/wishlistSlice';
 import { addToCart } from '../../cart/cartSlice';
+import { showToast } from '../../ui/uiSlice';
 import screenSizeIcon from '../../../assets/icons/screensize-icon.svg';
 import cpuIcon from '../../../assets/icons/cpu-icon.svg';
 import coresIcon from '../../../assets/icons/cores-icon.svg';
@@ -158,7 +159,10 @@ export default function ProductInfo({ product }) {
                 <button
                     type="button"
                     className="btn btn--outline"
-                    onClick={() => dispatch(toggleWishlist({ id: product.id, title: product.title, price: product.price, thumbnail: product.thumbnail }))}
+                    onClick={() => {
+                        dispatch(toggleWishlist({ id: product.id, title: product.title, price: product.price, thumbnail: product.thumbnail }));
+                        dispatch(showToast(isInWishlist ? 'Removed from wishlist' : 'Added to wishlist'));
+                    }}
                     aria-pressed={isInWishlist}
                 >
                     {isInWishlist ? 'Remove from Wishlist' : 'Add to Wishlist'}

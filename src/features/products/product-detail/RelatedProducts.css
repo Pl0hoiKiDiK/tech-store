@@ -42,10 +42,8 @@
   padding: 0;
 }
 
-.related-card__like img {
-  width: 32px;
-  height: 32px;
-  opacity: 0.77;
+.related-card__like svg {
+  display: block;
 }
 
 .related-card__image {
