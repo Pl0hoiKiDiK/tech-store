@@ -2,3 +2,6 @@ node_modules
 dist
 .DS_Store
 *.log
+.tmp/
+lighthouse-login.json
+lighthouse-login-new.json
