@@ -33,7 +33,7 @@ module.exports = merge(common, {
     }),
     {
       apply: (compiler) => {
-        compiler.hooks.afterEmit.tap('CopyRobotsTxt', () => {
+        compiler.hooks.afterEmit.tap('CopyPublicAssets', () => {
           fs.copyFileSync(
             path.resolve(__dirname, 'public/robots.txt'),
             path.resolve(__dirname, 'dist/robots.txt'),

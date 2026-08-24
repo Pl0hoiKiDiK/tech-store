@@ -22,6 +22,14 @@ const STORAGE_OPTIONS = [
     { label: '1TB', status: 'unavailable' },
 ];
 
+// DummyJSON does not provide these fields — static values keep the Figma layout intact.
+const MOCK_QUICK_SPECS = {
+    cores: '8',
+    mainCamera: '48 MP',
+    frontCamera: '12 MP',
+    battery: '4000 mAh',
+};
+
 function QuickSpec({ icon, label, value }) {
     return (
         <li className="quick-spec">
@@ -126,10 +134,10 @@ export default function ProductInfo({ product }) {
                 <ul className="quick-specs">
                     <QuickSpec icon={screenSizeIcon} label="Screen size" value={`${product.dimensions?.width || '—'}"`} />
                     <QuickSpec icon={cpuIcon} label="CPU" value={product.brand} />
-                    <QuickSpec icon={coresIcon} label="Number of Cores" value="8" />
-                    <QuickSpec icon={mainCameraIcon} label="Main camera" value="48 MP" />
-                    <QuickSpec icon={frontCameraIcon} label="Front-camera" value="12 MP" />
-                    <QuickSpec icon={batteryIcon} label="Battery capacity" value="4000 mAh" />
+                    <QuickSpec icon={coresIcon} label="Number of Cores" value={MOCK_QUICK_SPECS.cores} />
+                    <QuickSpec icon={mainCameraIcon} label="Main camera" value={MOCK_QUICK_SPECS.mainCamera} />
+                    <QuickSpec icon={frontCameraIcon} label="Front-camera" value={MOCK_QUICK_SPECS.frontCamera} />
+                    <QuickSpec icon={batteryIcon} label="Battery capacity" value={MOCK_QUICK_SPECS.battery} />
                 </ul>
             </div>
 

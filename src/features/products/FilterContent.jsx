@@ -14,7 +14,7 @@ const CATEGORIES = [
 
 const EXTRA_FILTERS = ['Battery capacity', 'Screen type', 'Screen diagonal', 'Protection class', 'Built-in memory'];
 
-export { CATEGORIES, EXTRA_FILTERS };
+export { CATEGORIES };
 
 export default function FilterContent({
   isMobile = false,

@@ -1,9 +1,11 @@
 import { configureStore } from '@reduxjs/toolkit';
+import { api } from './api';
 import authReducer from '../features/auth/authSlice';
 import wishlistReducer from '../features/wishlist/wishlistSlice';
 import cartReducer from '../features/cart/cartSlice';
 import uiReducer from '../features/ui/uiSlice';
-import { productsApi } from '../features/products/productsApi';
+import '../features/auth/authApi';
+import '../features/products/productsApi';
 
 export const store = configureStore({
   reducer: {
@@ -11,8 +13,8 @@ export const store = configureStore({
     wishlist: wishlistReducer,
     cart: cartReducer,
     ui: uiReducer,
-    [productsApi.reducerPath]: productsApi.reducer,
+    [api.reducerPath]: api.reducer,
   },
   middleware: (getDefaultMiddleware) =>
-    getDefaultMiddleware().concat(productsApi.middleware),
+    getDefaultMiddleware().concat(api.middleware),
 });
