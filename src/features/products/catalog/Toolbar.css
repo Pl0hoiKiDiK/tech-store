@@ -75,4 +75,9 @@
     font-size: 20px;
     color: #000;
   }
+
+  .mobile-controls__btn.custom-select .custom-select__trigger {
+    border: none;
+    padding: 0;
+  }
 }

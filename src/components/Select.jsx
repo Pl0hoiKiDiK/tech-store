@@ -1,7 +1,7 @@
 import React, { useState, useRef, useEffect } from 'react';
 import './select.css';
 
-export default function Select({ value, options, onChange }) {
+export default function Select({ value, options, onChange, className = '' }) {
   const [open, setOpen] = useState(false);
   const ref = useRef(null);
 
@@ -18,7 +18,7 @@ export default function Select({ value, options, onChange }) {
   const selected = options.find((opt) => opt.value === value);
 
   return (
-    <div className="custom-select" ref={ref}>
+    <div className={`custom-select ${className}`} ref={ref}>
       <button
         type="button"
         className="custom-select__trigger"
