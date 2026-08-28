@@ -12,8 +12,8 @@ import deliveryTruckIcon from '../../../assets/icons/delivery-truck-icon.svg';
 import shopIcon from '../../../assets/icons/shop-icon.svg';
 import verifyIcon from '../../../assets/icons/verify-icon.svg';
 import './ProductInfo.css';
+import { COLOR_OPTIONS } from './constants/color-options';
 
-const COLOR_OPTIONS = ['#111111', '#8B5E3C', '#C0392B', '#D9C89E', '#B8C4C8'];
 const STORAGE_OPTIONS = [
     { label: '64GB', status: 'available' },
     { label: '128GB', status: 'available' },

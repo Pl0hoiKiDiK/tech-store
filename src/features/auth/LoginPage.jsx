@@ -1,13 +1,10 @@
 import React, { useState } from 'react';
-import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import loginArt from '../../assets/images/login-art.svg';
 import { useLoginMutation } from './authApi';
-import { setCredentials } from './authSlice';
 import './login.css';
 
 export default function LoginPage() {
-  const dispatch = useDispatch();
   const navigate = useNavigate();
   const [login, { isLoading }] = useLoginMutation();
 
@@ -20,8 +17,7 @@ export default function LoginPage() {
     setError('');
 
     try {
-      const data = await login({ username, password }).unwrap();
-      dispatch(setCredentials({ user: data, accessToken: data.accessToken }));
+      await login({ username, password }).unwrap();
       navigate('/catalog');
     } catch {
       setError('Invalid username or password');

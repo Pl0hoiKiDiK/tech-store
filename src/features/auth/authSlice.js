@@ -1,4 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
+import { authApi } from './authApi';
 
 const tokenFromStorage = localStorage.getItem('accessToken');
 
@@ -10,13 +11,6 @@ const authSlice = createSlice({
     isAuthenticated: Boolean(tokenFromStorage),
   },
   reducers: {
-    setCredentials: (state, action) => {
-      const { user, accessToken } = action.payload;
-      state.user = user;
-      state.accessToken = accessToken;
-      state.isAuthenticated = true;
-      localStorage.setItem('accessToken', accessToken);
-    },
     logout: (state) => {
       state.user = null;
       state.accessToken = null;
@@ -24,7 +18,26 @@ const authSlice = createSlice({
       localStorage.removeItem('accessToken');
     },
   },
+  extraReducers: (builder) => {
+    builder
+      .addMatcher(authApi.endpoints.login.matchFulfilled, (state, action) => {
+        state.user = action.payload;
+        state.accessToken = action.payload.accessToken;
+        state.isAuthenticated = true;
+        localStorage.setItem('accessToken', action.payload.accessToken);
+      })
+      .addMatcher(authApi.endpoints.getMe.matchFulfilled, (state, action) => {
+        state.user = action.payload;
+        state.isAuthenticated = true;
+      })
+      .addMatcher(authApi.endpoints.getMe.matchRejected, (state) => {
+        state.user = null;
+        state.accessToken = null;
+        state.isAuthenticated = false;
+        localStorage.removeItem('accessToken');
+      });
+  },
 });
 
-export const { setCredentials, logout } = authSlice.actions;
+export const { logout } = authSlice.actions;
 export default authSlice.reducer;

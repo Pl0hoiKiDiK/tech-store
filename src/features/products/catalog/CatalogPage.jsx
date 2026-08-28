@@ -1,11 +1,10 @@
-import React, { useMemo, useState, useEffect } from 'react';
-import { useSearchParams } from 'react-router-dom';
-import { useGetProductsByCategoryQuery, useSearchProductsQuery } from '../productsApi';
+import React, { useState } from 'react';
 import FilterContent, { CATEGORIES } from '../FilterContent';
 import MobileFilterPanel from '../MobileFilterPanel';
 import { DesktopToolbar, MobileToolbar } from './Toolbar';
 import ProductGrid from './ProductGrid';
 import Pagination from './Pagination';
+import useCatalogFilters from './useCatalogFilters';
 import './shared.css';
 
 const PAGE_SIZE = 9;
@@ -19,94 +18,28 @@ function ArrowIcon({ color = '#A4A4A4' }) {
 }
 
 export default function CatalogPage() {
-    const [searchParams, setSearchParams] = useSearchParams();
-    const searchQuery = searchParams.get('q')?.trim() || '';
-
-    const [activeCategory, setActiveCategory] = useState('smartphones');
-    const {
-        data: categoryData,
-        isLoading: isCategoryLoading,
-        isError: isCategoryError,
-    } = useGetProductsByCategoryQuery(activeCategory, {
-        skip: Boolean(searchQuery),
-    });
-    const {
-        data: searchData,
-        isLoading: isSearchLoading,
-        isError: isSearchError,
-    } = useSearchProductsQuery(searchQuery, {
-        skip: !searchQuery,
-    });
-
-    const [selectedBrands, setSelectedBrands] = useState([]);
-    const [brandSearch, setBrandSearch] = useState('');
-    const [sortBy, setSortBy] = useState('rating');
-    const [page, setPage] = useState(1);
     const [mobileFilterOpen, setMobileFilterOpen] = useState(false);
 
-    const data = searchQuery ? searchData : categoryData;
-    const isLoading = searchQuery ? isSearchLoading : isCategoryLoading;
-    const isError = searchQuery ? isSearchError : isCategoryError;
-    const allProducts = data?.products || [];
-
-    useEffect(() => {
-        setPage(1);
-    }, [searchQuery, activeCategory]);
-
-    const priceBounds = useMemo(() => {
-        if (allProducts.length === 0) return { min: 0, max: 1000 };
-        const prices = allProducts.map((p) => p.price);
-        return { min: Math.floor(Math.min(...prices)), max: Math.ceil(Math.max(...prices)) };
-    }, [allProducts]);
-
-    const [priceRange, setPriceRange] = useState(null);
-
-    useEffect(() => {
-        setPriceRange(priceBounds);
-    }, [priceBounds.min, priceBounds.max]);
-
-    const brands = useMemo(() => {
-        const counts = {};
-        allProducts.forEach((p) => {
-            counts[p.brand] = (counts[p.brand] || 0) + 1;
-        });
-        return Object.entries(counts).sort((a, b) => a[0].localeCompare(b[0]));
-    }, [allProducts]);
-
-    const filteredBrands = brands.filter(([name]) =>
-        name.toLowerCase().includes(brandSearch.toLowerCase())
-    );
-
-    const toggleBrand = (brand) => {
-        setSelectedBrands((prev) =>
-            prev.includes(brand) ? prev.filter((b) => b !== brand) : [...prev, brand]
-        );
-        setPage(1);
-    };
-
-    const handleCategoryChange = (slug) => {
-        setActiveCategory(slug);
-        setSelectedBrands([]);
-        setPage(1);
-        if (searchQuery) {
-            setSearchParams({});
-        }
-    };
-
-    const filtered = useMemo(() => {
-        let result = allProducts;
-        if (selectedBrands.length > 0) {
-            result = result.filter((p) => selectedBrands.includes(p.brand));
-        }
-        if (priceRange) {
-            result = result.filter((p) => p.price >= priceRange.min && p.price <= priceRange.max);
-        }
-        return [...result].sort((a, b) => {
-            if (sortBy === 'price') return a.price - b.price;
-            if (sortBy === 'title') return a.title.localeCompare(b.title);
-            return b.rating - a.rating;
-        });
-    }, [allProducts, selectedBrands, priceRange, sortBy]);
+    const {
+        searchQuery,
+        activeCategory,
+        selectedBrands,
+        brandSearch,
+        setBrandSearch,
+        sortBy,
+        setSortBy,
+        page,
+        setPage,
+        priceRange,
+        priceBounds,
+        setPriceRange,
+        isLoading,
+        isError,
+        filteredBrands,
+        filtered,
+        toggleBrand,
+        handleCategoryChange,
+    } = useCatalogFilters();
 
     const totalPages = Math.max(1, Math.ceil(filtered.length / PAGE_SIZE));
     const pageItems = filtered.slice((page - 1) * PAGE_SIZE, page * PAGE_SIZE);
