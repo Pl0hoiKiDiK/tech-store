@@ -9,26 +9,44 @@ const loadFromStorage = () => {
   }
 };
 
-const initialState = {
-  items: loadFromStorage(),
-};
-
 const cartSlice = createSlice({
   name: 'cart',
-  initialState,
+  initialState: {
+    items: loadFromStorage(),
+  },
   reducers: {
     addToCart: (state, action) => {
       const product = action.payload;
-      const exists = state.items.find((item) => item.id === product.id);
-      if (exists) {
-        exists.quantity += 1;
+      const existing = state.items.find((item) => item.id === product.id);
+      if (existing) {
+        existing.quantity += 1;
       } else {
         state.items.push({ ...product, quantity: 1 });
       }
-      localStorage.setItem('cart', JSON.stringify(state.items));
+    },
+    decrementFromCart: (state, action) => {
+      const existing = state.items.find((item) => item.id === action.payload);
+      if (existing && existing.quantity > 1) {
+        existing.quantity -= 1;
+      }
+    },
+    removeFromCart: (state, action) => {
+      state.items = state.items.filter((item) => item.id !== action.payload);
+    },
+    clearCart: (state) => {
+      state.items = [];
     },
   },
 });
 
-export const { addToCart } = cartSlice.actions;
+export const { addToCart, decrementFromCart, removeFromCart, clearCart } = cartSlice.actions;
 export default cartSlice.reducer;
+
+export const cartLocalStorageMiddleware = (store) => (next) => (action) => {
+  const result = next(action);
+  if (action.type?.startsWith('cart/')) {
+    const { items } = store.getState().cart;
+    localStorage.setItem('cart', JSON.stringify(items));
+  }
+  return result;
+};
